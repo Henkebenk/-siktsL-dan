@@ -85,6 +85,7 @@ export default {
     overflow: hidden;
 }
 .letter-left textarea{
+    color:#50342a;
     display:block;
     height:100%;
     line-height: 28px;
@@ -97,6 +98,14 @@ export default {
     resize: none;
     border-radius: 1rem;
     min-height:1.5rem;
+}
+.input{
+    position:relative;
+}
+.info{
+    position: absolute;
+    bottom:1rem;
+    right:1rem;
 }
 .letter-right{
     overflow: hidden;
@@ -133,9 +142,12 @@ export default {
     border-radius: 2rem;
     cursor: pointer;
 }
-.send-button:hover{
+.send-button:hover {
     background-color: #bf7e92;
-    color:white;
+    color: white;
+}
+.send-button label, .send-button svg{
+    cursor: pointer;
 }
 @media screen and (max-width: 800px){
     .letter h2 {
