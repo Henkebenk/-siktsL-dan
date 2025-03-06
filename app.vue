@@ -1,0 +1,43 @@
+<template>
+  <main>
+    <Sky/>
+    <Ground/>
+    <Mountains/>
+    <Trees/>
+    <div class="interactives">
+      <Letter/>
+    </div>
+  </main>
+</template>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+body {
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  margin: 0;
+  transition:all 0.3s ease-in-out;
+}
+main {
+  position:relative;
+  width:100%;
+  height: 100dvh;
+}
+.interactives {
+  padding:0 20px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 2rem;
+  /* height: 100dvh; */
+}
+@media screen and (max-width: 500px){
+    .interactives{
+      padding: 2rem 1rem;
+
+    }
+    
+}
+</style>
