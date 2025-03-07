@@ -12,7 +12,7 @@ export default {
     methods: {
         startAnimation() {
             const cloudsElement = this.$el.querySelector('.clouds');
-            cloudsElement.style.animation = 'scrollBackground 60s linear infinite';
+            cloudsElement.style.animation = 'scrollBackground 720s linear infinite';
         }
     }
 };
@@ -40,12 +40,18 @@ export default {
     animation: scrollBackground 60s linear infinite;
 }
 
+@media screen and (max-width: 800px){
+    .clouds {
+        height: 80%;
+    }
+}
+
 @keyframes scrollBackground {
     0% {
         background-position: 0 0;
     }
     100% {
-        background-position: -2000px 0;
+        background-position: -30000px 0;
     }
 }
 </style>

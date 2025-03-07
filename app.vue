@@ -4,6 +4,7 @@
     <Ground/>
     <Mountains/>
     <Trees/>
+    <Mailbox/>
     <div class="interactives">
       <Letter/>
     </div>

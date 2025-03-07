@@ -39,12 +39,12 @@ export default {
     methods: {
         adjustTextareaRows() {
             const textarea = this.$refs.letterTextarea;
-            if (window.innerWidth > 1200) {
-                textarea.rows = 12;
-            } else if (window.innerWidth > 600) {
-                textarea.rows = 11;
-            } else if (window.innerWidth > 500) {
-                textarea.rows = 9;
+            // if (window.innerWidth > 1200) {
+            //     textarea.rows = 11;
+            // } else if (window.innerWidth > 600) {
+            //     textarea.rows = 10;
+            if (window.innerWidth > 500) {
+                textarea.rows = 7;
                 this.showFullSendButton = true;   
             } else {
                 this.showFullSendButton = false;
@@ -58,13 +58,17 @@ export default {
 
 <style>
 .letter {
-    max-width:800px;
+    max-width:600px;
     z-index: 100;
     color:#50342a;
     width:100%;
     background-color: #e6c4cf;
     border-radius: 1rem;
     /* aspect-ratio: 16/9; */
+}
+.letter h2 {
+    margin:0;
+    margin-bottom:0.5rem;
 }
 .content {
     padding:2rem;
@@ -153,7 +157,6 @@ export default {
     .letter h2 {
         font-size: 1.2rem;
     }
-
     .content {
         padding: 1rem;
     }
