@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="408.06772"
+   zoomAndPan="magnify"
+   viewBox="0 0 306.05079 45.855469"
+   height="61.140625"
+   preserveAspectRatio="xMidYMid"
+   version="1.0"
+   id="svg374"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs150">
+    <clipPath
+       id="e25e61d7c9">
+      <path
+         d="m 346.10156,278.37109 h 306.12891 v 45.85547 H 346.10156 Z m 0,0"
+         clip-rule="nonzero"
+         id="path149" />
+    </clipPath>
+    <clipPath
+       id="591aad0dc9">
+      <path
+         d="m 409.59766,278.37109 h 179.05468 l 63.5,45.85547 H 346.10156 Z m 0,0"
+         clip-rule="nonzero"
+         id="path150" />
+    </clipPath>
+  </defs>
+  <g
+     clip-path="url(#e25e61d7c9)"
+     id="g374"
+     transform="translate(-346.10156,-278.37109)">
+    <g
+       clip-path="url(#591aad0dc9)"
+       id="g373">
+      <path
+         fill="#794c5a"
+         d="m 346.10156,278.37109 h 306.12891 v 45.85547 H 346.10156 Z m 0,0"
+         fill-opacity="1"
+         fill-rule="nonzero"
+         id="path372" />
+    </g>
+  </g>
+</svg>

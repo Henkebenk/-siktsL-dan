@@ -32,13 +32,10 @@ main {
   flex-direction: column;
   align-items: center;
   padding: 2rem 2rem;
-  /* height: 100dvh; */
 }
 @media screen and (max-width: 500px){
     .interactives{
       padding: 2rem 1rem;
-
     }
-    
 }
 </style>

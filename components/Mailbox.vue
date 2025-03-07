@@ -6,14 +6,16 @@
                 </div>
             </div>
             <div class="box">
-                <img src="../public/mailbox_bottom.svg" alt="mailbox bottom">
+                <div class="box-frame">
+                    <img src="../public/mailbox_inside.svg" alt="mailbox inside" class="box-inside">
+                    <div class="box-outside"></div>
+                </div>
                 <div class="mailbox-tag">Åsiktslådan</div>
             </div>
-            <div class="lid">
+            <div class="lid" id="lid">
                 <img src="../public/mailbox_lid.svg" alt="mailbox lid">
             </div>
         </div>
-
     </div>
 </template>
 
@@ -35,20 +37,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
 }
-.lid{
+.lid {
+    z-index:30;
     position: absolute;
-    top:0;
+    top: 0;
+    transform-origin: top;
 }
 .lid img{
     width:100%;
     height: auto;
 }
 .box{
-    max-width:300px;
-    width:70%;
+    max-width:310px;
+    width:75%;
     position: absolute;
-    top:20px;
+    top:0.5px;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -58,7 +63,21 @@
     width:100%;
     height: auto;
 }
+.box-frame{
+    display:flex;
+    flex-direction: column;
+}
+.box-inside{
+    z-index:10;
+}
+.box-outside{
+    z-index:20;
+    background-color: #bf7e92ff;
+    border-radius: 0 0 1rem 1rem;
+    aspect-ratio: 3/3;
+}
 .mailbox-tag{
+    z-index:40;
     padding:0.5rem;
     background-color: #e6c4cfff;
     position: absolute;
@@ -84,5 +103,23 @@
     height:90%;
     position:absolute;
     margin:0 auto;
+}
+@keyframes openLid {
+    0% {
+        transform: scaleY(1);
+    }
+    40% {
+        transform: scaleY(-1.5);
+    }
+    50% {
+        z-index:10;
+    }
+    60% {
+        transform: scaleY(-1.5);
+        z-index:10;
+    }
+    100% {
+        transform: scaleY(1);
+    }
 }
 </style>

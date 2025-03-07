@@ -14,7 +14,7 @@
                     <div class="adress-row"></div>
                 </div>
                 <div class="send">
-                    <div class="send-button">
+                    <div class="send-button" @click="sendLetter">
                         <label v-if="showFullSendButton == true">Skicka</label>
                         <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-horizontal"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
                     </div>
@@ -39,10 +39,6 @@ export default {
     methods: {
         adjustTextareaRows() {
             const textarea = this.$refs.letterTextarea;
-            // if (window.innerWidth > 1200) {
-            //     textarea.rows = 11;
-            // } else if (window.innerWidth > 600) {
-            //     textarea.rows = 10;
             if (window.innerWidth > 500) {
                 textarea.rows = 7;
                 this.showFullSendButton = true;   
@@ -50,6 +46,19 @@ export default {
                 this.showFullSendButton = false;
                 textarea.rows = 5;
             }
+        },
+        sendLetter() {
+            this.openLid();
+            const letterElement = this.$el;
+            letterElement.style.animation = 'none';
+            void letterElement.offsetWidth;
+            letterElement.style.animation = 'insertLetter 1.5s ease-in-out';
+        },
+        openLid() {
+            const lidElement = document.getElementById('lid');
+            lidElement.style.animation = 'none';
+            void lidElement.offsetWidth;
+            lidElement.style.animation = 'openLid 1.5s ease-in-out';
         }
     }
 }
@@ -64,7 +73,6 @@ export default {
     width:100%;
     background-color: #e6c4cf;
     border-radius: 1rem;
-    /* aspect-ratio: 16/9; */
 }
 .letter h2 {
     margin:0;
@@ -82,10 +90,7 @@ export default {
     display:flex;
     flex-direction: column;
     flex-grow:2;
-    /* width:calc(60% - 1rem); */
-    /* width:45%; */
     height:100%;
-    /* width:100%; */
     overflow: hidden;
 }
 .letter-left textarea{
@@ -178,5 +183,18 @@ export default {
         justify-content: center;
     }
     
+}
+@keyframes insertLetter {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+    50% {
+        transform: scale(0.5) translateY(20dvh);
+        z-index: 15;
+    }
+    100% {
+        transform: scale(0.4) translateY(150dvh);
+        z-index: 15;
+    }
 }
 </style>
