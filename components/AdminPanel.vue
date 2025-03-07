@@ -2,7 +2,12 @@
     <div class="admin">
             <div class="admin-panel">
                 <h2>Adminpanel</h2>
-                <button @click="logout">Logga ut</button>
+                <div class="button-row">
+                    <button @click="logout">Logga ut</button>
+                    <div class="refresh-button">
+                        <RefreshCcw @click="getPosts" />
+                    </div>
+                </div>
                 <div class="posts">
                     <div v-for="post in posts" :key="post.id" class="pots">
                         <div class="time">{{ post.time }}</div>
@@ -12,6 +17,10 @@
             </div>
     </div>
 </template>
+
+<script setup>
+import { RefreshCcw } from 'lucide-vue-next';
+</script>
 
 <script>
 import { getAuth, signOut } from 'firebase/auth';
@@ -36,6 +45,7 @@ export default {
                 });
         },
         async getPosts() {
+            this.posts = [];
             const db = getFirestore();
             const postsCollection = collection(db, 'asikter');
             const postsQuery = query(postsCollection, orderBy('time', 'desc'));
@@ -70,6 +80,34 @@ export default {
 </script>
 
 <style>
+.refresh-button {
+    background-color: #f2eeeb;
+    padding:1rem 1rem;
+    border-radius: 2rem;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    cursor: pointer;
+}
+.refresh-button img:hover {
+    background-color: #bf7e92;
+    color: white;
+}
+.refresh-button:hover {
+    background-color: #bf7e92;
+    color: white;
+}
+.refresh-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
 .time {
     font-size: 0.75rem;
     color: #bf7e92;
