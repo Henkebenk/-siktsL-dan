@@ -5,10 +5,17 @@
             <input type="text" placeholder="E-post" v-model="email" @keyup.enter="login">
             <input type="password" placeholder="Lösenord" v-model="password" @keyup.enter="login">
             <label v-if="errorMsg !=''">{{errorMsg}}</label>
-            <div class="button-large button-wide" @click="login">Logga in</div>
+            <div class="flex-row">
+                <div class="button-large" @click="home"><ChevronLeft/></div>
+                <div class="button-large button-wide" @click="login">Logga in</div>
+            </div>
         </div>
     </div>
 </template>
+
+<script setup>
+import { ChevronLeft } from "lucide-vue-next";
+</script>
 
 <script>
 import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
@@ -21,6 +28,9 @@ export default {
         errorMsg: '',
     }),
     methods: {
+        home() {
+            this.$router.push('/');
+        },
         async login() {
             const auth = getAuth();
             setPersistence(auth, browserLocalPersistence)
