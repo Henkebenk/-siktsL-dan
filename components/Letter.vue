@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div v-if="snackbarVisible" class="snackbar">{{ snackbarMessage }}</div>
+    <SnackBar ref="snackbar" message="Din åsikt är skickad" />
 </template>
 
 <script>
@@ -38,30 +38,21 @@ export default {
     },
     data: () => ({
         showFullSendButton: true,
-        snackbarVisible: false,
-        snackbarMessage: ''
     }),
     methods: {
         login() {
             this.$router.push('/login');
         },
         adjustTextareaRows() {
-        const textarea = this.$refs.letterTextarea;
-        if (!textarea) return;
-        if (window.innerWidth > 500) {
-            textarea.rows = 7;
-            this.showFullSendButton = true;   
-        } else {
-            this.showFullSendButton = false;
-            textarea.rows = 5;
-        }
-    },
-        showSnackbar(message) {
-            this.snackbarMessage = message;
-            this.snackbarVisible = true;
-            setTimeout(() => {
-                this.snackbarVisible = false;
-            }, 3000);
+            const textarea = this.$refs.letterTextarea;
+            if (!textarea) return;
+            if (window.innerWidth > 500) {
+                textarea.rows = 7;
+                this.showFullSendButton = true;   
+            } else {
+                this.showFullSendButton = false;
+                textarea.rows = 5;
+            }
         },
         async sendLetter() {
             this.openLid();
@@ -78,7 +69,7 @@ export default {
             setTimeout(() => {
                 this.$refs.letterTextarea.value = '';
             }, 2000);
-            this.showSnackbar('Din åsikt har skickats!');
+            this.$refs.snackbar.show('Din åsikt har skickats!');
         },
         openLid() {
             const lidElement = document.getElementById('lid');
@@ -88,7 +79,6 @@ export default {
         }
     }
 }
-
 </script>
 
 <style>
@@ -250,22 +240,42 @@ export default {
   75% { transform: translateY(-5px) rotate(-10deg) }
   100% { transform: translateY(0) rotate(0) }
 }
-.snackbar {
-    position: fixed;
-    top: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #e6c4cf;
-    color: #50342a;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    z-index: 200;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    animation: fadeInOut 3s;
-}
-
-@keyframes fadeInOut {
-    0%, 100% { opacity: 0; }
-    10%, 90% { opacity: 1; }
-}
+/* @media screen and (max-height: 800px) {
+    .letter {
+        position: relative;
+    }
+    @keyframes insertLetter {
+        0% {
+            transform: scale(1) translateY(0);
+        }
+        25% {
+            transform: scale(0.3) translateY(20dvh);
+            z-index: 15;
+            opacity: 1;
+        }
+        40%{
+            opacity: 1;
+        }
+        50% {
+            transform: scale(0.2) translateY(150dvh);
+            z-index: 15;
+            opacity: 0;
+        }
+        60% {
+            transform: scale(0) translateY(150dvh);
+            opacity: 0;
+            z-index: 15;
+        }
+        90%{
+            transform: scale(0) translateY(0);
+            opacity: 0;
+            z-index: 15;
+        }
+        100% {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            z-index: 15;
+        }   
+    }
+} */
 </style>

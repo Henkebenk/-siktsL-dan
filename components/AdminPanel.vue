@@ -31,6 +31,7 @@
             </div>
         </div>
     </div>
+    <SnackBar ref="snackbar" message="Din åsikt är skickad" />
 </template>
 
 <script setup>
@@ -50,11 +51,10 @@ import {
 } from "firebase/firestore";
 
 export default {
-    data() {
-        return {
-            posts: [],
-        };
-    },
+    data: () => ({
+        posts: [],
+        snackbarMessage: "",
+    }),
     methods: {
         home() {
             this.$router.push("/");
@@ -107,6 +107,7 @@ export default {
             this.posts = new_posts;
         },
         async deletePost(postId) {
+            this.$refs.snackbar.show("Tog bort åsikt med id: " + postId);
             const db = getFirestore();
             await deleteDoc(doc(db, "asikter", postId));
             this.getPosts();
@@ -165,7 +166,7 @@ export default {
     margin: 0;
 }
 .admin-panel {
-    overflow-y: scroll;
+    overflow: hidden;
     padding: 2rem;
     margin: 2rem;
     max-width: 600px;
@@ -177,10 +178,10 @@ export default {
     align-items: center;
     border-radius: 1rem;
     width: calc(100% - 6rem);
-    scrollbar-width: none;
+    height: calc(100% - 4rem); 
 }
 
-.admin-panel::-webkit-scrollbar {
+.posts::-webkit-scrollbar {
     display: none;
 }
 .wrapper {
@@ -204,7 +205,10 @@ export default {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
-    height: auto;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    border-radius: 1rem;
 }
 .pots {
     background-color: #f2eeeb;

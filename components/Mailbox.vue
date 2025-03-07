@@ -1,9 +1,9 @@
 <template>
     <div class="mailbox">
+        <div class="post-container">
+            <div class="post"></div>
+        </div>
         <div class="upper">
-            <div class="post-container">
-                <div class="post"></div>
-            </div>
             <div class="box">
                 <div class="box-frame">
                     <img
@@ -103,7 +103,7 @@
     background-color: #50342aff;
     width: 10%;
     max-width: 50px;
-    height: 90%;
+    height: 45%;
     position: absolute;
     margin: 0 auto;
 }
@@ -125,4 +125,13 @@
         transform: scaleY(1);
     }
 }
+/* @media screen and (max-height: 800px) {
+    .upper {
+        transform: scale(0.65);
+    }
+    .post{
+        height: 30%;
+    }
+} */
+
 </style>
