@@ -11,10 +11,11 @@ export default {
     },
     methods: {
         startAnimation() {
-            const cloudsElement = this.$el.querySelector('.clouds');
-            cloudsElement.style.animation = 'scrollBackground 720s linear infinite';
-        }
-    }
+            const cloudsElement = this.$el.querySelector(".clouds");
+            cloudsElement.style.animation =
+                "scrollBackground 720s linear infinite";
+        },
+    },
 };
 </script>
 
@@ -33,14 +34,14 @@ export default {
     top: 0;
     width: 100%;
     height: 50%;
-    background-image: url('@/public/clouds.svg');
+    background-image: url("@/public/clouds.svg");
     background-repeat: repeat-x;
     background-size: cover;
     overflow: hidden;
     animation: scrollBackground 60s linear infinite;
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 800px) {
     .clouds {
         height: 80%;
     }

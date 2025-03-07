@@ -2,10 +2,10 @@
     <div class="login">
         <div class="login-container">
             <h1>Admin | Logga in</h1>
-            <input type="text" placeholder="E-post" v-model="email">
-            <input type="password" placeholder="Lösenord" v-model="password">
+            <input type="text" placeholder="E-post" v-model="email" @keyup.enter="login">
+            <input type="password" placeholder="Lösenord" v-model="password" @keyup.enter="login">
             <label v-if="errorMsg !=''">{{errorMsg}}</label>
-            <button @click="login">Logga in</button>
+            <div class="button-large button-wide" @click="login">Logga in</div>
         </div>
     </div>
 </template>
@@ -83,19 +83,6 @@ input{
     outline:none;
     color:#50342a;
     width:100%;
-}
-button{
-    font-family: inherit;
-    color:#50342a;
-    border:none;
-    background-color: #f2eeeb;
-    padding:1rem 2rem;
-    border-radius: 2rem;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #bf7e92;
-    color: white;
 }
 .login-container h1 {
     margin:0;
