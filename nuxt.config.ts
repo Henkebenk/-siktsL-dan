@@ -6,5 +6,10 @@ export default defineNuxtConfig({
     head: {
       title: 'Åsiktslådan',
     }
+  },
+  runtimeConfig: {
+    public: {
+      firebaseApiKey: process.env.FIREBASE_API_KEY
+    }
   }
 })

@@ -1,0 +1,9 @@
+<template>
+    <main>
+        <Sky/>
+        <Ground/>
+        <Mountains/>
+        <Trees/>
+        <LoginContainer/>
+    </main>
+</template>

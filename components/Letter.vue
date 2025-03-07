@@ -1,12 +1,12 @@
 <template>
-    <div class="letter">
+    <div class="letter" ref="letterElement">
         <div class="content">
             <div class="letter-left">
                 <h2>Detta har jag på hjärtat...</h2>
                 <textarea ref="letterTextarea" rows="5"></textarea>
             </div>
             <div class="letter-right">
-                <img src="../public/stamp.svg" alt="stamp" class="stamp">
+                <img src="../public/stamp.svg" alt="stamp" class="stamp" @dblclick="login">
                 <div class="adress">
                     <div class="adress-row"></div>
                     <div class="adress-row"></div>
@@ -22,9 +22,12 @@
             </div>
         </div>
     </div>
+    <div v-if="snackbarVisible" class="snackbar">{{ snackbarMessage }}</div>
 </template>
 
 <script>
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+
 export default {
     mounted() {
         this.adjustTextareaRows();
@@ -35,8 +38,13 @@ export default {
     },
     data: () => ({
         showFullSendButton: true,
+        snackbarVisible: false,
+        snackbarMessage: ''
     }),
     methods: {
+        login() {
+            this.$router.push('/login');
+        },
         adjustTextareaRows() {
             const textarea = this.$refs.letterTextarea;
             if (window.innerWidth > 500) {
@@ -47,12 +55,29 @@ export default {
                 textarea.rows = 5;
             }
         },
-        sendLetter() {
+        showSnackbar(message) {
+            this.snackbarMessage = message;
+            this.snackbarVisible = true;
+            setTimeout(() => {
+                this.snackbarVisible = false;
+            }, 3000);
+        },
+        async sendLetter() {
             this.openLid();
-            const letterElement = this.$el;
+            const letterElement = this.$refs.letterElement;
             letterElement.style.animation = 'none';
             void letterElement.offsetWidth;
-            letterElement.style.animation = 'insertLetter 1.5s ease-in-out';
+            letterElement.style.animation = 'insertLetter 3s ease-in-out';
+
+            const db = getFirestore();
+            const docRef = await addDoc(collection(db, "asikter"), {
+                message: this.$refs.letterTextarea.value,
+                time: new Date()
+            });
+            setTimeout(() => {
+                this.$refs.letterTextarea.value = '';
+            }, 2000);
+            this.showSnackbar('Din åsikt har skickats!');
         },
         openLid() {
             const lidElement = document.getElementById('lid');
@@ -154,6 +179,7 @@ export default {
 .send-button:hover {
     background-color: #bf7e92;
     color: white;
+    animation: jump-shaking 0.5s;
 }
 .send-button label, .send-button svg{
     cursor: pointer;
@@ -188,13 +214,57 @@ export default {
     0% {
         transform: scale(1) translateY(0);
     }
-    50% {
+    25% {
         transform: scale(0.5) translateY(20dvh);
         z-index: 15;
+        opacity: 1;
     }
-    100% {
+    40%{
+        opacity: 1;
+    }
+    50% {
         transform: scale(0.4) translateY(150dvh);
         z-index: 15;
+        opacity: 0;
     }
+    60% {
+        transform: scale(0) translateY(150dvh);
+        opacity: 0;
+    }
+    90%{
+        transform: scale(0) translateY(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes jump-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateY(-5px) }
+  35% { transform: translateY(-5px) rotate(10deg) }
+  55% { transform: translateY(-5px) rotate(-10deg) }
+  65% { transform: translateY(-5px) rotate(10deg) }
+  75% { transform: translateY(-5px) rotate(-10deg) }
+  100% { transform: translateY(0) rotate(0) }
+}
+.snackbar {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #e6c4cf;
+    color: #50342a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    z-index: 200;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 3s;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
 }
 </style>

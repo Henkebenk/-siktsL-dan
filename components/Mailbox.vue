@@ -10,7 +10,7 @@
                     <img src="../public/mailbox_inside.svg" alt="mailbox inside" class="box-inside">
                     <div class="box-outside"></div>
                 </div>
-                <div class="mailbox-tag">Åsiktslådan</div>
+                <div class="mailbox-label">Åsiktslådan</div>
             </div>
             <div class="lid" id="lid">
                 <img src="../public/mailbox_lid.svg" alt="mailbox lid">
@@ -76,13 +76,13 @@
     border-radius: 0 0 1rem 1rem;
     aspect-ratio: 3/3;
 }
-.mailbox-tag{
+.mailbox-label{
     z-index:40;
     padding:0.5rem;
     background-color: #e6c4cfff;
     position: absolute;
     border-radius: 1rem;
-    top: 20%;
+    top: 30%;
     width:80%;
     text-align: center;
     font-size: 1.5rem;
