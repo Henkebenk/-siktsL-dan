@@ -31,6 +31,10 @@ main {
 .button-wide {
     padding: 1rem 2rem;
 }
+.flex-row {
+    display: flex;
+    gap: 1rem;
+}
 .button-large:hover {
     background-color: #bf7e92;
     color: white;

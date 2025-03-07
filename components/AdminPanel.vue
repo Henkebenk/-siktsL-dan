@@ -210,7 +210,8 @@ export default {
     background-color: #f2eeeb;
     color: #50342a;
     padding: 1rem;
-    width: 100%;
+    width:100%;
     border-radius: 1rem;
+    box-sizing: border-box;
 }
 </style>
