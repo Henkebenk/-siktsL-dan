@@ -1,15 +1,22 @@
 import { defineNuxtRouteMiddleware, navigateTo } from 'nuxt/app'
 import { useNuxtApp } from '#app'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
   if (process.server) return
 
   const { $auth } = useNuxtApp();
-  const user = $auth?.currentUser;
-
-  if (to.path === '/admin' && !user) {
-    return navigateTo('/login')
-  } else if (to.path === '/login' && user) {
-    return navigateTo('/admin')
-  }
+  const auth = getAuth();
+  
+  return new Promise((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      if (to.path === '/admin' && !user) {
+        resolve(navigateTo('/login'));
+      } else if (to.path === '/login' && user) {
+        resolve(navigateTo('/admin'));
+      } else {
+        resolve();
+      }
+    });
+  });
 });

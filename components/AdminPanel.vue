@@ -3,7 +3,10 @@
         <div class="admin-panel">
             <h2>Adminpanel</h2>
             <div class="button-row">
-                <div class="button-large" @click="logout">Logga ut</div>
+                <div class="flex-row">
+                    <div class="button-large" @click="home"><House/></div>
+                    <div class="button-large" @click="logout"><LogOut/></div>
+                </div>
                 <div class="button-large">
                     <RefreshCcw @click="getPosts" />
                 </div>
@@ -31,7 +34,7 @@
 </template>
 
 <script setup>
-import { RefreshCcw, Trash2 } from "lucide-vue-next";
+import { RefreshCcw, Trash2, House, LogOut } from "lucide-vue-next";
 </script>
 
 <script>
@@ -53,19 +56,21 @@ export default {
         };
     },
     methods: {
+        home() {
+            this.$router.push("/");
+        },
         logout() {
             const auth = getAuth();
             signOut(auth)
                 .then(() => {
                     console.log("User signed out");
-                    this.$router.push("/");
+                    this.$router.push("/login");
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         },
         async getPosts() {
-            this.posts = [];
             const db = getFirestore();
             const postsCollection = collection(db, "asikter");
             const postsQuery = query(postsCollection, orderBy("time", "desc"));
@@ -73,6 +78,7 @@ export default {
 
             const currentYear = new Date().getFullYear();
 
+            var new_posts = [];
             postsSnapshot.forEach((doc) => {
                 const postData = doc.data();
                 const postDate = postData.time.toDate();
@@ -96,8 +102,9 @@ export default {
 
                 postData.time = `${date}, ${time}`;
                 postData.id = doc.id;
-                this.posts.push(postData);
+                new_posts.push(postData);
             });
+            this.posts = new_posts;
         },
         async deletePost(postId) {
             const db = getFirestore();
@@ -112,6 +119,10 @@ export default {
 </script>
 
 <style>
+.flex-row {
+    display: flex;
+    gap: 1rem;
+}
 .message-missing {
     color: #a17e72;
 }

@@ -11,8 +11,9 @@
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { useRouter } from 'vue-router';
+
 export default {
     data: () => ({
         email: '',
@@ -22,7 +23,10 @@ export default {
     methods: {
         async login() {
             const auth = getAuth();
-            signInWithEmailAndPassword(auth, this.email, this.password)
+            setPersistence(auth, browserLocalPersistence)
+                .then(() => {
+                    return signInWithEmailAndPassword(auth, this.email, this.password);
+                })
                 .then((userCredential) => {
                     const user = userCredential.user;
                     console.log(user);
