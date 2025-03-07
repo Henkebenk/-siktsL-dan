@@ -46,15 +46,16 @@ export default {
             this.$router.push('/login');
         },
         adjustTextareaRows() {
-            const textarea = this.$refs.letterTextarea;
-            if (window.innerWidth > 500) {
-                textarea.rows = 7;
-                this.showFullSendButton = true;   
-            } else {
-                this.showFullSendButton = false;
-                textarea.rows = 5;
-            }
-        },
+        const textarea = this.$refs.letterTextarea;
+        if (!textarea) return;
+        if (window.innerWidth > 500) {
+            textarea.rows = 7;
+            this.showFullSendButton = true;   
+        } else {
+            this.showFullSendButton = false;
+            textarea.rows = 5;
+        }
+    },
         showSnackbar(message) {
             this.snackbarMessage = message;
             this.snackbarVisible = true;

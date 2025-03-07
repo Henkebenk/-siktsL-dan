@@ -99,7 +99,7 @@ export default {
     gap: 1rem;
     align-items: center;
     border-radius: 1rem;
-    width: 100%;
+    width: calc(100% - 6rem);
     scrollbar-width: none;
 }
 
